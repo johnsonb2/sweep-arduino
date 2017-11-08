@@ -69,7 +69,7 @@ class Sweep
     *   @param success Whether a reading was successfully retrieved.
     *   @return The reading as a ScanPacket object.
     */
-    ScanPacket getReading(bool &success);
+    ScanPacket getReading(bool *success);
 
     /**
     *   Check if the device is ready. A device is ready if the

@@ -75,7 +75,7 @@ bool bSuccess = device.startScanning();
 for (int i = 0; i < 10; i++) {
     // Create a scan packet to populate with the sensor reading
     bool success = false;
-    ScanPacket reading = device.getReading(success);
+    ScanPacket reading = device.getReading(&success);
     if(success) {
         bool bFirstOfNewScan = reading.isSync();
         float angle = reading.getAngleDegrees();
@@ -121,7 +121,7 @@ bool stopScanning()
 Signals the sweep device to stop scanning. Will block for ~500ms to flush leftover data stream from the buffer and validate a second response from the sensor.
 
 ```c++
-ScanPacket getReading(bool &success)
+ScanPacket getReading(bool *success)
 ```
 
 Reads a single sensor reading from the serial buffer. Must be called frequently enough to keep up with the data stream.
@@ -149,7 +149,7 @@ Blocks until the device is ready. Returns true if the device is ready, and false
 int32_t getMotorSpeed()
 ```
 
-Returns the current motor speed setting in HZ
+Returns the current motor speed setting in HZ.
 
 ```c++
 bool setMotorSpeed(const uint8_t motorSpeedCode[2])

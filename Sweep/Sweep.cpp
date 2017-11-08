@@ -53,9 +53,13 @@ bool Sweep::stopScanning()
     return false;
 }
 
-ScanPacket Sweep::getReading(bool &success)
+ScanPacket Sweep::getReading(bool *success)
 {
-    success = false;
+
+    if (success)
+    {
+        *success = false;
+    }
     if (!bIsScanning)
     {
         return ScanPacket(false, 0, 0, 0);
@@ -82,7 +86,10 @@ ScanPacket Sweep::getReading(bool &success)
         // read signal strength value
         uint8_t signalStrength = _responseScanPacket[i++];
 
-        success = true;
+        if (success)
+        {
+            *success = true;
+        }
         return ScanPacket(bIsSync, rawAngle, distance, signalStrength);
     }
 	
